@@ -139,6 +139,20 @@ if( dotColor === false)
 
              var svgFile =   Base64.encode(document.getElementById("svgDiv").innerHTML);
 
+             var canvas = document.createElement('canvas');
+             canvas.width = getSize(2) + 30;
+             canvas.height = getSize(2) + 30;
+
+             var ctx = canvas.getContext('2d');
+
+             var img = document.createElement('img');
+             img.onload = function() {
+               ctx.drawImage(img, 0, 0);
+               var url = canvas.toDataURL('image/png');
+               document.getElementById('text6').innerHTML += 'Get a PNG Image of your code <a style="text-decoration: underline;" download="data.png" href-lang="image/png" href="' + url + '">here</a>';
+             };
+             img.src = 'data:image/svg+xml;base64,' + svgFile;
+
            //  console.log(svgFile);
 
              var contentHR = "";
@@ -149,7 +163,7 @@ if( dotColor === false)
 
              document.getElementById("text6").innerHTML = "Get a SVG Image of your code <a style= 'text-decoration: underline;' download='data.svg' href-lang='image/svg+xml' href='data:image/svg+xml;base64,\n"+svgFile+"'>here</a> or embed it in to your own page:<br><div>" +
                      '<b>&lt;iframe src=&quot;'+contentHR+'&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; height=&quot;'+(getSize(2)+30)+'&quot; width=&quot;'+ (getSize(2)+30)+'&quot;&gt;&lt;/iframe&gt;</b></div>' +
-                     '<br><br>';
+                     '<br>';
 
 
 
